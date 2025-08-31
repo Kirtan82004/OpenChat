@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import Filter from "bad-words";
+import {Filter} from "bad-words";
 
 const openai = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -48,3 +48,4 @@ export async function POST(request) {
     );
   }
 }
+
