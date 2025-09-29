@@ -1,6 +1,8 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Home() {
   const [message, setMessage] = useState('');
@@ -80,13 +82,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
-              className={`max-w-[80%] px-4 py-3 rounded-2xl shadow ${
-                msg.role === 'user'
-                  ? 'bg-cyan-600 text-white ml-auto'
-                  : 'bg-white border border-gray-300'
-              }`}
+              className={`max-w-[80%] px-4 py-3 rounded-2xl shadow ${msg.role === 'user'
+                ? 'bg-cyan-600 text-white ml-auto'
+                : 'bg-white border border-gray-300'
+                }`}
             >
-              {msg.text}
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className="prose prose-sm max-w-none prose-p:mb-2 prose-li:marker:text-cyan-600"
+              >
+                {msg.text}
+              </ReactMarkdown>
             </motion.div>
           ))}
 
